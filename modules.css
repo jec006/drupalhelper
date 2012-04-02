@@ -1,0 +1,29 @@
+#drupalhelper-module-search-bar {
+	padding: 5px;
+	background:#eee;
+	border:1px solid #ddd;
+}
+
+.drupalhelper-input {
+	color:#666;
+	padding:5px;
+	font-size:14px;
+	width:300px;
+	background:#fff;
+	border:1px solid #ccc;
+}
+
+.column-side .column-wrapper {
+	position:fixed;
+	display:block;
+	width:33.3%;
+}
+
+.goto-bottom {
+	margin:0 5px;
+}
+
+.link-deps {
+	float:right;
+	margin:5px;
+}
