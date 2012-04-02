@@ -103,7 +103,8 @@ function ModuleList() {
       'ctools' : 'chaos tools',
       'vntf' : 'views node taxonomy filter',
       'ga stats' : 'google analytics statistics',
-      'gastats' : 'google analytics statistics'
+      'gastats' : 'google analytics statistics',
+      'ds' : 'display suite'
     };
 
     //helper functions
@@ -242,12 +243,13 @@ function ModuleList() {
       suggest(this.value);  
     }
   };
-  searchbar.appendChild(input);
-
-  var instr = document.createElement('span');
+  
+  var instr = document.createElement('div');
   instr.innerText = ' Search for a module.';
   instr.className = 'instructions';
   searchbar.appendChild(instr);
+
+  searchbar.appendChild(input);
 
   var actions = document.getElementsByClassName('form-actions');
   for (var i = actions.length - 1; i >= 0; i--) {
@@ -266,13 +268,19 @@ function ModuleList() {
   var ldeps = document.createElement('a');
   ldeps.href = '#';
   ldeps.className = 'link-deps';
-  ldeps.innerText = 'Link Dependencies';
+  ldeps.innerText = '[Link Dependencies]';
   ldeps.title = 'Link each dependecy so clicking it will scroll to that module.  This can take some time.';
+
+  //maintain whether we have already linked these things
+  var linked = false;
   ldeps.onclick = function() {
-    linkDescriptions();
+    if (!linked) {
+      linked = true;
+      linkDescriptions();
+    }
   }
 
-  searchbar.appendChild(ldeps);
+  instr.appendChild(ldeps);
 
   //create a link to send the use all the way to the bottom of the page.
   var bottom = document.createElement('a');
@@ -281,15 +289,16 @@ function ModuleList() {
   bottom.title = 'Go to the bottom of the page.';
   bottom.innerText = '[bottom]';
   bottom.onclick = function(e) {
-    window.scrollTo(0, document.body.offsetHeight);
+    window.scrollTo(0, document.body.scrollHeight);
     //for some reason it doesn't go all the way down in rubik if we don't run it twice
     setTimeout(function() {
-      window.scrollTo(0, document.body.offsetHeight);
+      window.scrollTo(0, document.body.scrollHeight);
     }, 10);
     return false;
   };
 
   var sidebar = document.getElementsByClassName('column-side');
+  var top = document.getElementById('console');
   if (sidebar && sidebar[0]) {
     sidebar = sidebar[0].getElementsByClassName('column-wrapper');
     //put the bottom link in the sidebar if its there
@@ -299,14 +308,22 @@ function ModuleList() {
       bottom.added = true;
     }
     sidebar[0].appendChild(searchbar);
-  } else {
-    var top = document.getElementById('console');
+  } else if (top) {
     top.appendChild(searchbar); 
-  } 
+  } else {
+    var content = document.getElementsByClassName('region-content');
+    if (content) {
+      content = content[0];
+
+      content.insertBefore(searchbar, content.firstElementChild);
+    } else {
+      console.log('Could not find a region to attach to.');
+    }
+  }
 
   if (!bottom.added) {
     //otherwise put the bottom link in the searchbar.
-    searchbar.appendChild(bottom);
+    instr.appendChild(bottom);
   }
 
   getModulesList();
