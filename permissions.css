@@ -1,0 +1,25 @@
+.drupalhelper-machine-name {
+	font-family: "Courier New", monospace;
+	padding: 0px 5px 0 0;
+}
+
+.drupalhelper-expand {
+	font-family: "Courier New", monospace;
+	font-weight: bold;
+	cursor: pointer;
+	text-align: center;
+}
+
+.drupalhelper-action-cell a {
+	display:block;
+	cursor: pointer;
+}
+
+.drupalhelper-action-row {
+	border: 1px solid #333;
+}
+
+.drupalhelper-collapse {
+	padding-left: 10px;
+	cursor: pointer;
+}
