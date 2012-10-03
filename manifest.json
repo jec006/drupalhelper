@@ -6,7 +6,8 @@
     "default_icon": "icon.png"
   },
   "permissions": [
-    "*://*/admin/modules"
+    "*://*/admin/modules",
+    "*://*/*/admin/modules"
   ],
   "content_scripts" : [
       {
