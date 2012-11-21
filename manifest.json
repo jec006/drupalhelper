@@ -6,24 +6,34 @@
     "default_icon": "icon.png"
   },
   "permissions": [
-    "*://*/admin/modules",
-    "*://*/*/admin/modules"
+    "<all_urls>"
   ],
   "content_scripts" : [
       {
         "matches" : [
           "*://*/admin/modules",
-          "*://*/admin/modules/list"
+          "*://*/admin/modules/list",
+          "*://*/*/admin/modules",
+          "*://*/*/admin/modules/list"
         ],
         "css" : ["modules.css"],
         "js" : ["modules.js"]
       },
       {
         "matches" : [
-          "*://*/admin/people/permissions"
+          "*://*/admin/people/permissions",
+          "*://*/*/admin/people/permissions"
         ],
         "css" : ["permissions.css"],
         "js" : ["permissions.js"]
+      },
+      {
+        "matches" : [
+          "*://*/admin/structure/context/list/*/edit",
+          "*://*/*/admin/structure/context/list/*/edit"
+        ],
+        "css" : ["context.css"],
+        "js" : ["context.js"]
       }
   ],
   "icons" : {

@@ -129,18 +129,26 @@ function handleNodePerms(node) {
   td.innerText = 'Drupal Helper Actions';
   actionrow.appendChild(td);
   var cols = node.colSpan;
+
   while(cols--) {
     var td = document.createElement('td');
     td.className = 'drupalhelper-action-cell';
     for (var type in action) {
       var a = document.createElement('a');
       a.innerHTML = 'Grant ' + type.replace('_', ' ') + ' for all types';
-      a.col = cols-2;
+      a.col = node.colSpan - cols -1;
       a.actiontype = type;
       a.onclick = function(e) {
         for(var i = 0; i < action[type].length; i++) {
           var cs = action[this.actiontype][i].getElementsByTagName('input');
-          cs[this.col].checked = true;
+          var cboxes = [];
+          for (var ind = 0; ind < cs.length; ind++) {
+            var item = cs[ind];
+            if (!item.disabled) {
+              cboxes.push(item);
+            }
+          }
+          cboxes[this.col].checked = true;
         }
       }
       td.appendChild(a);
