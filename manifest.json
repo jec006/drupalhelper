@@ -1,6 +1,6 @@
 {
   "name": "Drupal Helper",
-  "version": "0.5",
+  "version": "0.6",
   "description": "Provides convenience stuff for drupal.",
   "browser_action": {
     "default_icon": "icon.png"
